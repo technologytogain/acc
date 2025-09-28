@@ -1,0 +1,28 @@
+DELETE FROM students WHERE stud_id > 1501;
+TRUNCATE `attendance`;
+TRUNCATE `cron`;
+TRUNCATE `device_access_control`;
+TRUNCATE `device_access_control_info`;
+TRUNCATE `holidays`;
+TRUNCATE `import_clone`;
+TRUNCATE `logs`;
+TRUNCATE `logs_sync_details`;
+TRUNCATE `notification`;
+
+
+11-05-2023
+
+ALTER TABLE `device_access_control` ADD `register_no` VARCHAR(255) NOT NULL AFTER `upgrade`;
+ALTER TABLE `attendance` ADD `device_uniqueid` VARCHAR(255) NOT NULL AFTER `gender`;
+ALTER TABLE `attendance` DROP INDEX `p_out_six_time`;
+ALTER TABLE `students` CHANGE `acadamic_year` `academic_year` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '';
+ALTER TABLE `device_access_control` ADD `academic_year` INT NOT NULL AFTER `register_no`;
+ALTER TABLE `device_access_control` CHANGE `academic_year` `academic_year` INT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `attendance` ADD `academic_year` INT NOT NULL DEFAULT '0' AFTER `device_uniqueid`;
+ALTER TABLE `marks` ADD `academic_year` INT NOT NULL DEFAULT '0' AFTER `sent_at`;
+ALTER TABLE `marks` ADD `device_uniqueid` VARCHAR(255) NULL AFTER `academic_year`;
+ALTER TABLE `logs` ADD `academic_year` INT NOT NULL DEFAULT '0' AFTER `upgrade`;
+ALTER TABLE `notification` ADD `academic_year` INT NOT NULL DEFAULT '0' AFTER `year`;
+ALTER TABLE `student_photos` CHANGE `register_no` `unique_id` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL;
+ALTER TABLE `timetable` ADD `combained_periods` VARCHAR(255) NOT NULL AFTER `lunchbreak`;
+ALTER TABLE `settings` ADD `attendance_interval` VARCHAR(255) NOT NULL AFTER `grace_min`;
